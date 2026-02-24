@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Artist Portfolio</title>
+    <!-- 引入 Tailwind CSS 进行快速美观的样式构建 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google 字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- 引入 Phosphor 图标库 -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        accent: '#3b82f6', // 科技蓝，适合3D主题
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #f3f4f6;
+        }
+        /* 作品卡片悬浮特效 */
+        .project-card .overlay {
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 100%);
+        }
+        .project-card:hover .overlay {
+            opacity: 1;
+        }
+        .project-card img {
+            transition: transform 0.5s ease;
+        }
+        .project-card:hover img {
+            transform: scale(1.05);
+        }
+        /* 隐藏滚动条但保留功能 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        /* 过滤动画 */
+        .gallery-item {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .gallery-item.hide {
+            opacity: 0;
+            transform: scale(0.9);
+            pointer-events: none;
+            position: absolute;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+
+    <!-- 导航栏 -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300 backdrop-blur-md bg-darker/70 border-b border-white/5" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-widest uppercase">Z-Art<span class="text-accent">.</span></a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#work" class="hover:text-white transition-colors">作品集</a>
+                <a href="#skills" class="hover:text-white transition-colors">技能栈</a>
+                <a href="#about" class="hover:text-white transition-colors">关于我</a>
+            </div>
+            <a href="#contact" class="hidden md:block px-5 py-2 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors text-sm">
+                联系合作
+            </a>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-2xl text-white">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 头部横幅 Hero Section -->
+    <header class="relative pt-40 pb-20 md:pt-52 md:pb-32 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <!-- 背景发光效果 -->
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+        
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+            塑造虚拟空间的 <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">几何与光影</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-10">
+            你好，我是一名专注于硬表面建模与环境渲染的3D艺术家。熟练运用 Blender, Maya 和 Unreal Engine 创造引人入胜的视觉体验。
+        </p>
+        <div class="flex space-x-4">
+            <a href="#work" class="px-8 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors flex items-center gap-2">
+                浏览作品 <i class="ph ph-arrow-down-right text-lg"></i>
+            </a>
+            <a href="https://artstation.com" target="_blank" class="px-8 py-3 border border-gray-700 rounded-full hover:border-gray-500 hover:bg-white/5 transition-colors flex items-center gap-2">
+                ArtStation <i class="ph ph-arrow-up-right text-lg text-gray-400"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- 作品集模块 -->
+    <section id="work" class="py-20 px-6 max-w-7xl mx-auto min-h-screen">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">精选作品</h2>
+                <p class="text-gray-400">点击分类查看不同领域的3D创作</p>
+            </div>
+            
+            <!-- 过滤按钮 -->
+            <div class="flex flex-wrap gap-3 mt-6 md:mt-0" id="filter-btns">
+                <button class="filter-btn active px-4 py-2 rounded-full border border-gray-700 bg-white/10 text-sm hover:bg-white hover:text-black transition-all" data-filter="all">全部</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 text-gray-400 text-sm hover:bg-white/10 transition-all" data-filter="environment">场景/环境</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 text-gray-400 text-sm hover:bg-white/10 transition-all" data-filter="character">角色</button>
+                <button class="filter-btn px-4 py-2 rounded-full border border-gray-700 text-gray-400 text-sm hover:bg-white/10 transition-all" data-filter="prop">道具/硬表面</button>
+            </div>
+        </div>
+
+        <!-- 作品网格 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative" id="gallery">
+            
+            <!-- 作品 1 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="environment">
+                <!-- 占位图，请替换为您的真实作品链接 -->
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Cyberpunk City" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">环境渲染</span>
+                    <h3 class="text-xl font-bold mb-2">赛博朋克深巷</h3>
+                    <p class="text-sm text-gray-300 mb-4">使用 Blender 搭建，Octane 渲染。探索未来城市的光影构成。</p>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Blender</span>
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Octane</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 作品 2 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="character">
+                <img src="https://images.unsplash.com/photo-1633511090164-b4a141097fa8?q=80&w=1000&auto=format&fit=crop" alt="Sci-fi Character" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">角色建模</span>
+                    <h3 class="text-xl font-bold mb-2">机甲先锋</h3>
+                    <p class="text-sm text-gray-300 mb-4">ZBrush 高模雕刻，Substance Painter 材质制作。</p>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">ZBrush</span>
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">SP</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 作品 3 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="prop">
+                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" alt="Abstract 3D Shape" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">硬表面/道具</span>
+                    <h3 class="text-xl font-bold mb-2">量子核心引擎</h3>
+                    <p class="text-sm text-gray-300 mb-4">Maya 拓扑结构，影视级资产标准。</p>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Maya</span>
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Arnold</span>
+                    </div>
+                </div>
+            </div>
+
+             <!-- 作品 4 -->
+             <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="environment">
+                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Interior Render" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">场景渲染</span>
+                    <h3 class="text-xl font-bold mb-2">极简实验室</h3>
+                    <p class="text-sm text-gray-300 mb-4">Unreal Engine 5 实时光线追踪渲染测试。</p>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">UE5</span>
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Lumen</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 作品 5 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="prop">
+                <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop" alt="Abstract render" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">材质表现</span>
+                    <h3 class="text-xl font-bold mb-2">流体与玻璃材质实验</h3>
+                    <p class="text-sm text-gray-300 mb-4">C4D 结合 Redshift 渲染器的高级材质节点测试。</p>
+                    <div class="flex gap-2">
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Cinema4D</span>
+                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Redshift</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 技能与工作流 -->
+    <section id="skills" class="py-20 bg-darker border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">工作流与技术栈</h2>
+                <p class="text-gray-400 mb-8 leading-relaxed">
+                    从早期的概念构思、白模搭建，到高模雕刻、拓扑展UV，再到材质绘制和最终的灯光渲染，我熟悉完整的3D资产制作管线。能够为影视动画或游戏引擎提供优化良好的模型。
+                </p>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-sm">Blender / Maya (建模/拓扑)</span>
+                            <span class="text-gray-500 text-sm">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5">
+                            <div class="bg-white h-1.5 rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-sm">ZBrush (数字雕刻)</span>
+                            <span class="text-gray-500 text-sm">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5">
+                            <div class="bg-gray-400 h-1.5 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-sm">Substance Painter/Designer (材质)</span>
+                            <span class="text-gray-500 text-sm">90%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5">
+                            <div class="bg-gray-300 h-1.5 rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium text-sm">Unreal Engine 5 (实时渲染/打光)</span>
+                            <span class="text-gray-500 text-sm">80%</span>
+                        </div>
+                        <div class="w-full bg-gray-800 rounded-full h-1.5">
+                            <div class="bg-blue-400 h-1.5 rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-dark p-6 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center hover:border-white/20 transition-colors">
+                    <i class="ph ph-cube text-4xl text-gray-300 mb-3"></i>
+                    <h4 class="font-bold">硬表面建模</h4>
+                    <p class="text-xs text-gray-500 mt-2">机甲、武器、载具</p>
+                </div>
+                <div class="bg-dark p-6 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center hover:border-white/20 transition-colors">
+                    <i class="ph ph-tree text-4xl text-gray-300 mb-3"></i>
+                    <h4 class="font-bold">环境搭建</h4>
+                    <p class="text-xs text-gray-500 mt-2">自然景观、科幻城市</p>
+                </div>
+                <div class="bg-dark p-6 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center hover:border-white/20 transition-colors">
+                    <i class="ph ph-drop text-4xl text-gray-300 mb-3"></i>
+                    <h4 class="font-bold">材质与贴图</h4>
+                    <p class="text-xs text-gray-500 mt-2">PBR流程、节点材质</p>
+                </div>
+                <div class="bg-dark p-6 rounded-2xl border border-white/5 flex flex-col items-center justify-center text-center hover:border-white/20 transition-colors">
+                    <i class="ph ph-lightbulb text-4xl text-gray-300 mb-3"></i>
+                    <h4 class="font-bold">灯光与渲染</h4>
+                    <p class="text-xs text-gray-500 mt-2">物理光照、后期合成</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系与底部 -->
+    <footer id="contact" class="pt-24 pb-12 px-6 max-w-4xl mx-auto text-center relative">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6">准备好创造下一个宇宙了吗？</h2>
+        <p class="text-gray-400 mb-10">无论是全职机会还是外包项目合作，我都随时期待与您交流探讨。</p>
+        
+        <a href="mailto:hello@example.com" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-200 transition-colors text-lg mb-16 shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            <i class="ph ph-envelope-simple text-xl"></i> 发送邮件联系我
+        </a>
+
+        <div class="flex justify-center space-x-6 mb-12">
+            <a href="#" class="w-12 h-12 rounded-full bg-darker border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all text-xl">
+                <i class="ph ph-behance-logo"></i>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full bg-darker border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all text-xl">
+                <i class="ph ph-instagram-logo"></i>
+            </a>
+            <a href="#" class="w-12 h-12 rounded-full bg-darker border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all text-xl">
+                <i class="ph ph-linkedin-logo"></i>
+            </a>
+        </div>
+        
+        <p class="text-sm text-gray-600">
+            &copy; 2026 Z-Art. All rights reserved. Designed for 3D Artists.
+        </p>
+    </footer>
+
+    <!-- 交互脚本 -->
+    <script>
+        // 导航栏滚动模糊效果
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-darker/90', 'shadow-lg');
+                nav.classList.remove('bg-darker/70');
+            } else {
+                nav.classList.remove('bg-darker/90', 'shadow-lg');
+                nav.classList.add('bg-darker/70');
+            }
+        });
+
+        // 作品集分类过滤逻辑
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // 移除所有按钮的激活状态
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-white/10', 'text-white', 'active');
+                    b.classList.add('text-gray-400');
+                    if (b === btn) {
+                        b.classList.remove('text-gray-400');
+                        b.classList.add('bg-white/10', 'text-white', 'active');
+                    }
+                });
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.classList.remove('hide');
+                        // 使用 setTimeout 确保 position 恢复后再显示透明度
+                        setTimeout(() => {
+                            item.style.position = 'relative';
+                        }, 50);
+                    } else {
+                        item.classList.add('hide');
+                        // 动画结束后将其位置释放
+                        setTimeout(() => {
+                            if(item.classList.contains('hide')) {
+                                item.style.position = 'absolute';
+                            }
+                        }, 400); // 对应 CSS 中的 0.4s transition
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
