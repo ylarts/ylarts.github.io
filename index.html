@@ -122,7 +122,7 @@
         <div class="flex flex-col md:flex-row justify-between items-end mb-12">
             <div>
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">精选作品</h2>
-                <p class="text-gray-400">点击分类查看不同领域的3D创作</p>
+                <p class="text-gray-400">点击查看高清大图，或通过分类浏览</p>
             </div>
             
             <!-- 过滤按钮 -->
@@ -138,79 +138,99 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative" id="gallery">
             
             <!-- 作品 1 -->
-            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="environment">
-                <!-- 占位图，请替换为您的真实作品链接 -->
-                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop" alt="Cyberpunk City" class="w-full h-full object-cover">
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="environment">
+                <!-- img 的 src 为正常展示图，如果需要极高分辨率，可在此处加上 data-highres="./image/image1_HD.jpg" -->
+                <img src="./image/image1.jpg" alt="作品 1" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">环境渲染</span>
                     <h3 class="text-xl font-bold mb-2">赛博朋克深巷</h3>
                     <p class="text-sm text-gray-300 mb-4">使用 Blender 搭建，Octane 渲染。探索未来城市的光影构成。</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Blender</span>
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Octane</span>
-                    </div>
                 </div>
             </div>
 
             <!-- 作品 2 -->
-            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="character">
-                <img src="https://images.unsplash.com/photo-1633511090164-b4a141097fa8?q=80&w=1000&auto=format&fit=crop" alt="Sci-fi Character" class="w-full h-full object-cover">
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="character">
+                <img src="./image/image2.jpg" alt="作品 2" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">角色建模</span>
                     <h3 class="text-xl font-bold mb-2">机甲先锋</h3>
                     <p class="text-sm text-gray-300 mb-4">ZBrush 高模雕刻，Substance Painter 材质制作。</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">ZBrush</span>
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">SP</span>
-                    </div>
                 </div>
             </div>
 
             <!-- 作品 3 -->
-            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="prop">
-                <img src="https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=1000&auto=format&fit=crop" alt="Abstract 3D Shape" class="w-full h-full object-cover">
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="prop">
+                <img src="./image/image3.jpg" alt="作品 3" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">硬表面/道具</span>
                     <h3 class="text-xl font-bold mb-2">量子核心引擎</h3>
                     <p class="text-sm text-gray-300 mb-4">Maya 拓扑结构，影视级资产标准。</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Maya</span>
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Arnold</span>
-                    </div>
                 </div>
             </div>
 
              <!-- 作品 4 -->
-             <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="environment">
-                <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" alt="Interior Render" class="w-full h-full object-cover">
+             <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="environment">
+                <img src="./image/image4.jpg" alt="作品 4" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">场景渲染</span>
                     <h3 class="text-xl font-bold mb-2">极简实验室</h3>
                     <p class="text-sm text-gray-300 mb-4">Unreal Engine 5 实时光线追踪渲染测试。</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">UE5</span>
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Lumen</span>
-                    </div>
                 </div>
             </div>
             
             <!-- 作品 5 -->
-            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="prop">
-                <img src="https://images.unsplash.com/photo-1614729939124-032f0b56c9ce?q=80&w=1000&auto=format&fit=crop" alt="Abstract render" class="w-full h-full object-cover">
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="prop">
+                <img src="./image/image5.jpg" alt="作品 5" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">材质表现</span>
                     <h3 class="text-xl font-bold mb-2">流体与玻璃材质实验</h3>
                     <p class="text-sm text-gray-300 mb-4">C4D 结合 Redshift 渲染器的高级材质节点测试。</p>
-                    <div class="flex gap-2">
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Cinema4D</span>
-                        <span class="px-2 py-1 bg-black/50 backdrop-blur rounded text-xs text-gray-300 border border-white/10">Redshift</span>
-                    </div>
                 </div>
             </div>
-            
+
+            <!-- 作品 6 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="character">
+                <img src="./image/image6.jpg" alt="作品 6" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">角色建模</span>
+                    <h3 class="text-xl font-bold mb-2">异星生物设定</h3>
+                    <p class="text-sm text-gray-300 mb-4">生物概念设计与3D实现。</p>
+                </div>
+            </div>
+
+            <!-- 作品 7 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="environment">
+                <img src="./image/image7.jpg" alt="作品 7" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">环境渲染</span>
+                    <h3 class="text-xl font-bold mb-2">废土基地</h3>
+                    <p class="text-sm text-gray-300 mb-4">末日废土风格场景搭建。</p>
+                </div>
+            </div>
+
+            <!-- 作品 8 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="prop">
+                <img src="./image/image8.jpg" alt="作品 8" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">硬表面/道具</span>
+                    <h3 class="text-xl font-bold mb-2">重型科幻枪械</h3>
+                    <p class="text-sm text-gray-300 mb-4">次世代游戏武器流程制作。</p>
+                </div>
+            </div>
+
+            <!-- 作品 9 -->
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="character">
+                <img src="./image/image9.jpg" alt="作品 9" class="w-full h-full object-cover">
+                <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
+                    <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">角色建模</span>
+                    <h3 class="text-xl font-bold mb-2">赛博格刺客</h3>
+                    <p class="text-sm text-gray-300 mb-4">结合机械与人体解剖学的角色雕刻。</p>
+                </div>
+            </div>
+
             <!-- 作品 10 -->
-            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group" data-category="environment">
-                <img src="./image/image1.jpg" alt="作品 1" class="w-full h-full object-cover">
+            <div class="gallery-item project-card relative overflow-hidden rounded-xl aspect-[4/5] bg-gray-900 group cursor-pointer" data-category="environment">
+                <img src="./image/image10.jpg" alt="作品 10" class="w-full h-full object-cover">
                 <div class="overlay absolute inset-0 flex flex-col justify-end p-6">
                     <span class="text-accent text-xs font-bold tracking-wider uppercase mb-1">场景渲染</span>
                     <h3 class="text-xl font-bold mb-2">太空舱内景</h3>
@@ -320,6 +340,18 @@
         </p>
     </footer>
 
+    <!-- 高清大图预览弹窗 (Lightbox) -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/90 backdrop-blur-sm hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <!-- 关闭按钮 -->
+        <button id="lightbox-close" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/70 hover:text-white text-4xl z-[101] transition-colors">
+            <i class="ph ph-x"></i>
+        </button>
+        <!-- 图片容器 -->
+        <div class="relative max-w-[95vw] max-h-[95vh] flex items-center justify-center">
+            <img id="lightbox-img" src="" alt="High Resolution View" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl scale-95 transition-transform duration-300">
+        </div>
+    </div>
+
     <!-- 交互脚本 -->
     <script>
         // 导航栏滚动模糊效果
@@ -340,7 +372,6 @@
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 移除所有按钮的激活状态
                 filterBtns.forEach(b => {
                     b.classList.remove('bg-white/10', 'text-white', 'active');
                     b.classList.add('text-gray-400');
@@ -355,21 +386,85 @@
                 galleryItems.forEach(item => {
                     if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                         item.classList.remove('hide');
-                        // 使用 setTimeout 确保 position 恢复后再显示透明度
                         setTimeout(() => {
                             item.style.position = 'relative';
                         }, 50);
                     } else {
                         item.classList.add('hide');
-                        // 动画结束后将其位置释放
                         setTimeout(() => {
                             if(item.classList.contains('hide')) {
                                 item.style.position = 'absolute';
                             }
-                        }, 400); // 对应 CSS 中的 0.4s transition
+                        }, 400); 
                     }
                 });
             });
+        });
+
+        // --- 新增：高清大图预览 (Lightbox) 逻辑 ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // 为每个作品卡片添加点击事件
+        projectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const img = card.querySelector('img');
+                
+                // 默认直接放大显示的图。
+                // 如果您以后有单独的超清图源，可以在卡片的 <img> 标签里加 data-highres="高清图路径" 
+                // 并使用 const targetSrc = img.dataset.highres || img.src; 来获取
+                const targetSrc = img.dataset.highres || img.src;
+                
+                lightboxImg.src = targetSrc;
+                
+                // 显示弹窗层
+                lightbox.classList.remove('hidden');
+                
+                // 强制浏览器重绘以触发平滑过渡动画
+                void lightbox.offsetWidth;
+                
+                lightbox.classList.remove('opacity-0');
+                lightbox.classList.add('opacity-100');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+                
+                // 隐藏底层网页的滚动条，防止同时滚动
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // 关闭弹窗功能
+        const closeLightbox = () => {
+            lightbox.classList.remove('opacity-100');
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            
+            // 等待动画结束(300ms)后完全隐藏元素并清空图片缓存
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightboxImg.src = ''; 
+                document.body.style.overflow = ''; // 恢复网页滚动
+            }, 300); 
+        };
+
+        // 点击右上角 X 关闭
+        lightboxClose.addEventListener('click', closeLightbox);
+        
+        // 点击图片外部的黑色背景区也关闭
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.parentElement === lightbox) {
+                closeLightbox();
+            }
+        });
+        
+        // 支持按 ESC 键关闭
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
         });
     </script>
 </body>
